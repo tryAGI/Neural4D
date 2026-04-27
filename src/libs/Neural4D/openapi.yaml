@@ -1,0 +1,402 @@
+openapi: 3.0.3
+info:
+  title: Neural4D API
+  description: |
+    API for Neural4D text-to-3D, image-to-3D, background matting, model conversion,
+    point balance, and job progress operations.
+
+    This OpenAPI document is manually maintained from Neural4D's public API PDF
+    because Neural4D does not publish a downloadable OpenAPI document.
+  version: "1.0.0"
+servers:
+  - url: https://alb.neural4d.com:3000
+security:
+  - BearerAuth: []
+tags:
+  - name: generation
+  - name: images
+  - name: models
+  - name: account
+paths:
+  /api/generateModelWithText:
+    post:
+      operationId: generateModelWithText
+      summary: Generate 3D models from a text prompt
+      tags: [generation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateModelWithTextRequest"
+      responses:
+        "200":
+          description: Model generation request accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerationResponse"
+  /api/retrieveModel:
+    post:
+      operationId: retrieveModel
+      summary: Retrieve a generated model
+      tags: [models]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UuidRequest"
+      responses:
+        "200":
+          description: Model retrieval result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RetrieveModelResponse"
+  /api/mattingImage:
+    post:
+      operationId: mattingImage
+      summary: Remove image background
+      tags: [images]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image]
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Source image file.
+      responses:
+        "200":
+          description: Matting request accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MattingImageResponse"
+  /api/getMattedResult:
+    post:
+      operationId: getMattedResult
+      summary: Get background matting results
+      tags: [images]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetMattedResultRequest"
+      responses:
+        "200":
+          description: Matting result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetMattedResultResponse"
+  /api/generateModelWithImage:
+    post:
+      operationId: generateModelWithImage
+      summary: Generate 3D models from a matted image file key
+      tags: [generation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateModelWithImageRequest"
+      responses:
+        "200":
+          description: Model generation request accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerationResponse"
+  /api/createCuteModelsFromImages:
+    post:
+      operationId: createCuteModelsFromImages
+      summary: Create stylized character models from images
+      tags: [generation]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [images, styleType]
+              properties:
+                images:
+                  type: array
+                  description: Source image files.
+                  items:
+                    type: string
+                    format: binary
+                styleType:
+                  type: string
+                  description: Requested stylization type.
+      responses:
+        "200":
+          description: Model generation request accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerationResponse"
+  /api/convertToFormat:
+    post:
+      operationId: convertToFormat
+      summary: Convert a generated model to another format
+      tags: [models]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConvertToFormatRequest"
+      responses:
+        "200":
+          description: Converted model URL
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConvertToFormatResponse"
+  /api/checkHumanImage:
+    post:
+      operationId: checkHumanImage
+      summary: Check whether an image contains a person
+      tags: [images]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image]
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Image to inspect.
+      responses:
+        "200":
+          description: Human image check result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckHumanImageResponse"
+  /api/queryPointsInfo:
+    post:
+      operationId: queryPointsInfo
+      summary: Query account point balance
+      tags: [account]
+      responses:
+        "200":
+          description: Point balance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryPointsInfoResponse"
+  /api/queryJobProgress:
+    post:
+      operationId: queryJobProgress
+      summary: Query model generation progress
+      tags: [models]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UuidRequest"
+      responses:
+        "200":
+          description: Job progress
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryJobProgressResponse"
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    GenerateModelWithTextRequest:
+      type: object
+      required: [prompt]
+      properties:
+        prompt:
+          type: string
+          description: Prompt describing the model to generate.
+        modelCount:
+          type: integer
+          format: int32
+          default: 4
+          description: Number of model candidates to generate.
+        disablePbr:
+          type: integer
+          format: int32
+          default: 0
+          enum: [0, 1]
+          description: Set to 1 to disable PBR material generation.
+    GenerateModelWithImageRequest:
+      type: object
+      required: [fileKey]
+      properties:
+        fileKey:
+          type: string
+          description: File key returned by the matting result endpoint.
+        modelCount:
+          type: integer
+          format: int32
+          default: 4
+          description: Number of model candidates to generate.
+        disablePbr:
+          type: integer
+          format: int32
+          default: 0
+          enum: [0, 1]
+          description: Set to 1 to disable PBR material generation.
+    UuidRequest:
+      type: object
+      required: [uuid]
+      properties:
+        uuid:
+          type: string
+          description: Generated model UUID.
+    GetMattedResultRequest:
+      type: object
+      required: [requestId]
+      properties:
+        requestId:
+          type: number
+          format: double
+          description: Matting request identifier.
+    ConvertToFormatRequest:
+      type: object
+      required: [uuid]
+      properties:
+        uuid:
+          type: string
+          description: Generated model UUID.
+        modelType:
+          type: string
+          default: glb
+          enum: [fbx, glb, obj, stl, blend, usdz]
+          description: Target model format.
+        modelSize:
+          type: integer
+          format: int32
+          default: 2
+          description: Target model size preset.
+    GenerationResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        message:
+          type: string
+        uuids:
+          type: array
+          items:
+            type: string
+    RetrieveModelResponse:
+      type: object
+      properties:
+        codeStatus:
+          type: string
+        message:
+          type: string
+        modelUrl:
+          type: string
+          format: uri
+        imageUrl:
+          type: string
+          format: uri
+        prompts:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+        sourcePage:
+          type: string
+    MattingImageResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        message:
+          type: string
+        queuePosition:
+          type: integer
+          format: int32
+        uploadedImageUrl:
+          type: string
+          format: uri
+        requestId:
+          type: number
+          format: double
+    GetMattedResultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        mattedImageUrls:
+          type: array
+          items:
+            type: string
+            format: uri
+        fileKeys:
+          type: array
+          items:
+            type: string
+    ConvertToFormatResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        modelUrl:
+          type: string
+          format: uri
+        statusType:
+          type: string
+    CheckHumanImageResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        result:
+          type: boolean
+        message:
+          type: string
+    QueryPointsInfoResponse:
+      type: object
+      properties:
+        statusType:
+          type: string
+        data:
+          $ref: "#/components/schemas/PointsInfo"
+        message:
+          type: string
+    PointsInfo:
+      type: object
+      additionalProperties: true
+      properties:
+        points:
+          type: number
+          format: double
+        balance:
+          type: number
+          format: double
+    QueryJobProgressResponse:
+      type: object
+      properties:
+        statusType:
+          type: string
+        progress:
+          type: number
+          format: double
+        message:
+          type: string
