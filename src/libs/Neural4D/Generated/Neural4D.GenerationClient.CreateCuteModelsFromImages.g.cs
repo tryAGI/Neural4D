@@ -120,6 +120,7 @@ namespace Neural4D
                             for (var __iImages = 0; __iImages < request.Images.Count; __iImages++)
                             {
                                 var __contentImages = new global::System.Net.Http.ByteArrayContent(request.Images[__iImages]);
+                            __contentImages.Headers.ContentType = new global::System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
                                 __httpRequestContent.Add(
                                     content: __contentImages,
                                     name: "\"images\"",
@@ -130,7 +131,7 @@ namespace Neural4D
                                 }
                             }
                             __httpRequestContent.Add(
-                                content: new global::System.Net.Http.StringContent($"{request.StyleType}"),
+                                content: new global::System.Net.Http.StringContent(request.StyleType ?? string.Empty),
                                 name: "\"styleType\"");
                             __httpRequest.Content = __httpRequestContent;
                 global::Neural4D.AutoSDKRequestOptionsSupport.ApplyHeaders(
