@@ -72,10 +72,10 @@ namespace Neural4D
         /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
         public ImagesClient(
-            global::System.Net.Http.HttpClient? httpClient = null,
-            global::System.Uri? baseUri = null,
-            global::System.Collections.Generic.List<global::Neural4D.EndPointAuthorization>? authorizations = null,
-            global::Neural4D.AutoSDKClientOptions? options = null,
+            global::System.Net.Http.HttpClient? httpClient,
+            global::System.Uri? baseUri,
+            global::System.Collections.Generic.List<global::Neural4D.EndPointAuthorization>? authorizations,
+            global::Neural4D.AutoSDKClientOptions? options,
             bool disposeHttpClient = true)
         {
 
