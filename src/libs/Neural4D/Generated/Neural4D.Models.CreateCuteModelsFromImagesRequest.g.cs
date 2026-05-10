@@ -54,5 +54,6 @@ namespace Neural4D
         public CreateCuteModelsFromImagesRequest()
         {
         }
+
     }
 }

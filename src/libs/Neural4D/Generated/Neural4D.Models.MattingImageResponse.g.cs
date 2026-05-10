@@ -75,5 +75,6 @@ namespace Neural4D
         public MattingImageResponse()
         {
         }
+
     }
 }
