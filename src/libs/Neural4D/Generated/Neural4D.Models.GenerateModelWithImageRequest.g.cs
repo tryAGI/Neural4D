@@ -68,5 +68,6 @@ namespace Neural4D
         public GenerateModelWithImageRequest()
         {
         }
+
     }
 }
