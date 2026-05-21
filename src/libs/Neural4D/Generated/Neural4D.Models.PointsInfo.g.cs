@@ -48,5 +48,6 @@ namespace Neural4D
         public PointsInfo()
         {
         }
+
     }
 }

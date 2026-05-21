@@ -19,6 +19,18 @@ namespace Neural4D
         /// <summary>
         /// Generate 3D models from a matted image file key
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Neural4D.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Neural4D.AutoSDKHttpResponse<global::Neural4D.GenerationResponse>> GenerateModelWithImageAsResponseAsync(
+
+            global::Neural4D.GenerateModelWithImageRequest request,
+            global::Neural4D.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Generate 3D models from a matted image file key
+        /// </summary>
         /// <param name="fileKey">
         /// File key returned by the matting result endpoint.
         /// </param>
