@@ -4,18 +4,18 @@
 namespace Neural4D
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class PointsInfo
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("points")]
         public double? Points { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("balance")]
         public double? Balance { get; set; }

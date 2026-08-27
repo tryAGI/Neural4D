@@ -10,27 +10,27 @@ namespace Neural4D
     public enum ConvertToFormatRequestModelType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Blend,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fbx,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Glb,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Obj,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Stl,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Usdz,
     }
