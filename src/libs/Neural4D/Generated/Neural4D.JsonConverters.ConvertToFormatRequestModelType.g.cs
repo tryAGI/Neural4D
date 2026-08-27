@@ -20,7 +20,7 @@ namespace Neural4D.JsonConverters
                     {
                         return global::Neural4D.ConvertToFormatRequestModelTypeExtensions.ToEnum(stringValue) ?? default;
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

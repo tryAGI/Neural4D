@@ -4,24 +4,24 @@
 namespace Neural4D
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ConvertToFormatResponse
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("message")]
         public string? Message { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("modelUrl")]
         public string? ModelUrl { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("statusType")]
         public string? StatusType { get; set; }

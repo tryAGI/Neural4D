@@ -4,7 +4,7 @@
 namespace Neural4D
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class UuidRequest
     {

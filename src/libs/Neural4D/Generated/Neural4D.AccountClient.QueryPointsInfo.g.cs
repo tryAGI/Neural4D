@@ -124,7 +124,7 @@ namespace Neural4D
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                 global::Neural4D.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,

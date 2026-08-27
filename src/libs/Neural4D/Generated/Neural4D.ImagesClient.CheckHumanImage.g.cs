@@ -137,7 +137,7 @@ namespace Neural4D
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
 
                             var __httpRequestContent = new global::System.Net.Http.MultipartFormDataContent();
@@ -581,7 +581,7 @@ namespace Neural4D
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
 
                             var __httpRequestContent = new global::System.Net.Http.MultipartFormDataContent();
@@ -987,7 +987,7 @@ namespace Neural4D
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
 
                             var __httpRequestContent = new global::System.Net.Http.MultipartFormDataContent();

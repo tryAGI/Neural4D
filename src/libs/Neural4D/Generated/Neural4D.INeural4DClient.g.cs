@@ -43,28 +43,28 @@ namespace Neural4D
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; }
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public AccountClient Account { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public GenerationClient Generation { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ImagesClient Images { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ModelsClient Models { get; }
 

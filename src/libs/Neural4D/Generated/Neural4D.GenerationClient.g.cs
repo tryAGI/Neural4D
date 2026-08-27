@@ -10,7 +10,7 @@ namespace Neural4D
     public sealed partial class GenerationClient : global::Neural4D.IGenerationClient, global::System.IDisposable
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public const string DefaultBaseUrl = "https://alb.neural4d.com:3000/";
 
@@ -37,7 +37,7 @@ namespace Neural4D
         internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::Neural4D.SourceGenerationContext.Default);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext
         {

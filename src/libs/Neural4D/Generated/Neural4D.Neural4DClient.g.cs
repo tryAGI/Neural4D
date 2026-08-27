@@ -14,7 +14,7 @@ namespace Neural4D
     public sealed partial class Neural4DClient : global::Neural4D.INeural4DClient, global::System.IDisposable
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public const string DefaultBaseUrl = "https://alb.neural4d.com:3000/";
 
@@ -41,7 +41,7 @@ namespace Neural4D
         internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::Neural4D.SourceGenerationContext.Default);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext
         {
@@ -51,7 +51,7 @@ namespace Neural4D
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public AccountClient Account => new AccountClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -60,7 +60,7 @@ namespace Neural4D
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public GenerationClient Generation => new GenerationClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -69,7 +69,7 @@ namespace Neural4D
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ImagesClient Images => new ImagesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -78,7 +78,7 @@ namespace Neural4D
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ModelsClient Models => new ModelsClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
